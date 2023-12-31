@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1410"
+   LastUpgradeVersion = "1510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0AAC5D9629539CCF003032C3"
-               BuildableName = "whisper.swiftui.app"
-               BlueprintName = "whisper.swiftui"
-               ReferencedContainer = "container:whisper.swiftui.xcodeproj">
+               BuildableName = "attentional.swiftui.app"
+               BlueprintName = "attentional.swiftui"
+               ReferencedContainer = "container:attentional.swiftui.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,7 +36,7 @@
                BlueprintIdentifier = "0AAC5DA729539CD0003032C3"
                BuildableName = "whisper.swiftuiTests.xctest"
                BlueprintName = "whisper.swiftuiTests"
-               ReferencedContainer = "container:whisper.swiftui.xcodeproj">
+               ReferencedContainer = "container:attentional.swiftui.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,7 +47,7 @@
                BlueprintIdentifier = "0AAC5DB129539CD0003032C3"
                BuildableName = "whisper.swiftuiUITests.xctest"
                BlueprintName = "whisper.swiftuiUITests"
-               ReferencedContainer = "container:whisper.swiftui.xcodeproj">
+               ReferencedContainer = "container:attentional.swiftui.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -61,15 +61,17 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      consoleMode = "0"
+      structuredConsoleMode = "1">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0AAC5D9629539CCF003032C3"
-            BuildableName = "whisper.swiftui.app"
-            BlueprintName = "whisper.swiftui"
-            ReferencedContainer = "container:whisper.swiftui.xcodeproj">
+            BuildableName = "attentional.swiftui.app"
+            BlueprintName = "attentional.swiftui"
+            ReferencedContainer = "container:attentional.swiftui.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -84,9 +86,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0AAC5D9629539CCF003032C3"
-            BuildableName = "whisper.swiftui.app"
-            BlueprintName = "whisper.swiftui"
-            ReferencedContainer = "container:whisper.swiftui.xcodeproj">
+            BuildableName = "attentional.swiftui.app"
+            BlueprintName = "attentional.swiftui"
+            ReferencedContainer = "container:attentional.swiftui.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

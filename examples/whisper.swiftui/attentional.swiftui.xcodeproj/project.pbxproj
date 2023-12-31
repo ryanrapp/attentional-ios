@@ -12,7 +12,7 @@
 		0AA751492953AC2E001EE061 /* models in Resources */ = {isa = PBXBuildFile; fileRef = 0AA751472953AC2E001EE061 /* models */; };
 		0AA7514C2953B569001EE061 /* RiffWaveUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7514B2953B569001EE061 /* RiffWaveUtils.swift */; };
 		0AA7514E2953D958001EE061 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7514D2953D958001EE061 /* Recorder.swift */; };
-		0AAC5D9B29539CCF003032C3 /* WhisperCppDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5D9A29539CCF003032C3 /* WhisperCppDemoApp.swift */; };
+		0AAC5D9B29539CCF003032C3 /* AttentionalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5D9A29539CCF003032C3 /* AttentionalApp.swift */; };
 		0AAC5D9D29539CCF003032C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5D9C29539CCF003032C3 /* ContentView.swift */; };
 		0AAC5D9F29539CD0003032C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AAC5D9E29539CD0003032C3 /* Assets.xcassets */; };
 		0AAC5DCE2953A05C003032C3 /* WhisperState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5DCD2953A05C003032C3 /* WhisperState.swift */; };
@@ -26,11 +26,11 @@
 		0AA751472953AC2E001EE061 /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
 		0AA7514B2953B569001EE061 /* RiffWaveUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiffWaveUtils.swift; sourceTree = "<group>"; };
 		0AA7514D2953D958001EE061 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
-		0AAC5D9729539CCF003032C3 /* whisper.swiftui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = whisper.swiftui.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0AAC5D9A29539CCF003032C3 /* WhisperCppDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperCppDemoApp.swift; sourceTree = "<group>"; };
+		0AAC5D9729539CCF003032C3 /* attentional.swiftui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = attentional.swiftui.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AAC5D9A29539CCF003032C3 /* AttentionalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionalApp.swift; sourceTree = "<group>"; };
 		0AAC5D9C29539CCF003032C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0AAC5D9E29539CD0003032C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0AAC5DA029539CD0003032C3 /* WhisperCppDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhisperCppDemo.entitlements; sourceTree = "<group>"; };
+		0AAC5DA029539CD0003032C3 /* Attentional.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Attentional.entitlements; sourceTree = "<group>"; };
 		0AAC5DCD2953A05C003032C3 /* WhisperState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperState.swift; sourceTree = "<group>"; };
 		0AAC5DD02953A394003032C3 /* LibWhisper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibWhisper.swift; sourceTree = "<group>"; };
 		E3F92DC22AFA8DD800A6A9D4 /* whisper.cpp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = whisper.cpp; path = ../..; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		0AAC5D9829539CCF003032C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0AAC5D9729539CCF003032C3 /* whisper.swiftui.app */,
+				0AAC5D9729539CCF003032C3 /* attentional.swiftui.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,7 +102,7 @@
 				0AA7513F2953AB32001EE061 /* Models */,
 				0AAC5DD32953A9ED003032C3 /* Supporting files */,
 				0AAC5DD22953A9E3003032C3 /* UI */,
-				0AAC5D9A29539CCF003032C3 /* WhisperCppDemoApp.swift */,
+				0AAC5D9A29539CCF003032C3 /* AttentionalApp.swift */,
 			);
 			path = whisper.swiftui.demo;
 			sourceTree = "<group>";
@@ -127,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				0AAC5D9E29539CD0003032C3 /* Assets.xcassets */,
-				0AAC5DA029539CD0003032C3 /* WhisperCppDemo.entitlements */,
+				0AAC5DA029539CD0003032C3 /* Attentional.entitlements */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -142,9 +142,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0AAC5D9629539CCF003032C3 /* whisper.swiftui */ = {
+		0AAC5D9629539CCF003032C3 /* attentional.swiftui */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0AAC5DBC29539CD0003032C3 /* Build configuration list for PBXNativeTarget "whisper.swiftui" */;
+			buildConfigurationList = 0AAC5DBC29539CD0003032C3 /* Build configuration list for PBXNativeTarget "attentional.swiftui" */;
 			buildPhases = (
 				0AAC5D9329539CCF003032C3 /* Sources */,
 				0AAC5D9429539CCF003032C3 /* Frameworks */,
@@ -154,12 +154,12 @@
 			);
 			dependencies = (
 			);
-			name = whisper.swiftui;
+			name = attentional.swiftui;
 			packageProductDependencies = (
 				E3F92DC42AFA8E3800A6A9D4 /* whisper */,
 			);
 			productName = WhisperCppDemo;
-			productReference = 0AAC5D9729539CCF003032C3 /* whisper.swiftui.app */;
+			productReference = 0AAC5D9729539CCF003032C3 /* attentional.swiftui.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -170,7 +170,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					0AAC5D9629539CCF003032C3 = {
 						CreatedOnToolsVersion = 14.1;
@@ -178,7 +178,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0AAC5D9229539CCF003032C3 /* Build configuration list for PBXProject "whisper.swiftui" */;
+			buildConfigurationList = 0AAC5D9229539CCF003032C3 /* Build configuration list for PBXProject "attentional.swiftui" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -191,7 +191,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0AAC5D9629539CCF003032C3 /* whisper.swiftui */,
+				0AAC5D9629539CCF003032C3 /* attentional.swiftui */,
 			);
 		};
 /* End PBXProject section */
@@ -216,7 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AAC5D9D29539CCF003032C3 /* ContentView.swift in Sources */,
-				0AAC5D9B29539CCF003032C3 /* WhisperCppDemoApp.swift in Sources */,
+				0AAC5D9B29539CCF003032C3 /* AttentionalApp.swift in Sources */,
 				0AAC5DCE2953A05C003032C3 /* WhisperState.swift in Sources */,
 				0AAC5DD12953A394003032C3 /* LibWhisper.swift in Sources */,
 				0AA7514C2953B569001EE061 /* RiffWaveUtils.swift in Sources */,
@@ -260,9 +260,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -319,9 +321,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -343,34 +347,44 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "whisper.swiftui.demo/Supporting files/WhisperCppDemo.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "whisper.swiftui.demo/Supporting files/Attentional.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"whisper.swiftui.demo/Supporting files/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = UT89RH6ZN7;
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ATTNL;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Needed to transcribe audio";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.whispercppdemo.WhisperCppDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozyintellect.ATTNL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -383,26 +397,35 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "whisper.swiftui.demo/Supporting files/WhisperCppDemo.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "whisper.swiftui.demo/Supporting files/Attentional.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"whisper.swiftui.demo/Supporting files/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = UT89RH6ZN7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ATTNL;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Needed to transcribe audio";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				LLVM_LTO = YES;
@@ -412,10 +435,11 @@
 					"-O3",
 					"-DNDEBUG",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.whispercppdemo.WhisperCppDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cozyintellect.ATTNL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -425,7 +449,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0AAC5D9229539CCF003032C3 /* Build configuration list for PBXProject "whisper.swiftui" */ = {
+		0AAC5D9229539CCF003032C3 /* Build configuration list for PBXProject "attentional.swiftui" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0AAC5DBA29539CD0003032C3 /* Debug */,
@@ -434,7 +458,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0AAC5DBC29539CD0003032C3 /* Build configuration list for PBXNativeTarget "whisper.swiftui" */ = {
+		0AAC5DBC29539CD0003032C3 /* Build configuration list for PBXNativeTarget "attentional.swiftui" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0AAC5DBD29539CD0003032C3 /* Debug */,

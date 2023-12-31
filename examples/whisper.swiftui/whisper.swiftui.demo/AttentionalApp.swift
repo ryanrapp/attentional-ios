@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct WhisperCppDemoApp: App {
+struct AttentionalApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
