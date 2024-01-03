@@ -8,14 +8,17 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
     @Published var messageLog = ""
     @Published var canTranscribe = false
     @Published var isRecording = false
-    
+    // Define a closure type for handling transcriptions
+var transcriptionHandler: (([TranscriptionData]) -> Void)?
+
     private var whisperContext: WhisperContext?
     private let recorder = Recorder()
     private var recordedFile: URL? = nil
     private var audioPlayer: AVAudioPlayer?
     
+    
     private var modelUrl: URL? {
-        Bundle.main.url(forResource: "ggml-small", withExtension: "bin", subdirectory: "models")
+        Bundle.main.url(forResource: "ggml-tiny", withExtension: "bin", subdirectory: "models")
     }
     
     private var sampleUrl: URL? {
@@ -25,6 +28,8 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
     private enum LoadError: Error {
         case couldNotLocateModel
     }
+    
+    static let shared = WhisperState()
     
     override init() {
         super.init()
@@ -70,6 +75,13 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
             messageLog += "Transcribing data...\n"
             await whisperContext.fullTranscribe(samples: data)
             let text = await whisperContext.getTranscription()
+            let transcriptionData = await whisperContext.getTranscriptionData()
+
+            // Call the handler with the completed transcription
+            DispatchQueue.main.async {
+                self.transcriptionHandler?(transcriptionData)
+            }
+
             messageLog += "Done: \(text)\n"
         } catch {
             print(error.localizedDescription)
@@ -81,7 +93,7 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
     
     private func readAudioSamples(_ url: URL) throws -> [Float] {
         stopPlayback()
-        try startPlayback(url)
+//        try startPlayback(url)
         return try decodeWaveFile(url)
     }
     
@@ -160,3 +172,4 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
         isRecording = false
     }
 }
+

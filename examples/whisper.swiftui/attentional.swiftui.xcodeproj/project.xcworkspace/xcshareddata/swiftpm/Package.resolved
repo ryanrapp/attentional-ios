@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "OpenAI",
+        "repositoryURL": "https://github.com/MacPaw/OpenAI.git",
+        "state": {
+          "branch": null,
+          "revision": "ac5892fd0de8d283362ddc30f8e9f1a0eaba8cc0",
+          "version": "0.2.5"
+        }
+      },
+      {
+        "package": "TailwindCSS-SwiftUI",
+        "repositoryURL": "https://github.com/joemasilotti/TailwindCSS-SwiftUI",
+        "state": {
+          "branch": "main",
+          "revision": "da3d3f2d13bd92a4a3c86f1af6a075a511d37770",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

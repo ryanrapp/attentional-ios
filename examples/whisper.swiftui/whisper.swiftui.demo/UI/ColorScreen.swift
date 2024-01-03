@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct ColorScreen: View {
+    let color: Color
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        color
     }
 }
 
-#Preview {
-    ColorScreen()
+struct ColorScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        ColorScreen(color: .red)
+    }
 }

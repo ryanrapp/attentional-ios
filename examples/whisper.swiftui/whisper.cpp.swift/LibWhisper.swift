@@ -5,6 +5,18 @@ enum WhisperError: Error {
     case couldNotInitializeContext
 }
 
+struct TranscriptionData {
+    var t0: Int64
+    var t1: Int64
+    var text: String
+
+    init(t0: Int64, t1: Int64, text: String) {
+        self.t0 = t0
+        self.t1 = t1
+        self.text = text
+    }
+}
+
 // Meet Whisper C++ constraint: Don't access from more than one thread at a time.
 actor WhisperContext {
     private var context: OpaquePointer
@@ -53,6 +65,19 @@ actor WhisperContext {
             transcription += String.init(cString: whisper_full_get_segment_text(context, i))
         }
         return transcription
+    }
+    
+    func getTranscriptionData() -> [TranscriptionData] {
+        var transcriptions = [TranscriptionData]();
+        
+        for i in 0..<whisper_full_n_segments(context) {
+            let text = String(cString: whisper_full_get_segment_text(context, i))
+            let t0 = Int64(whisper_full_get_segment_t0(context, i))
+            let t1 = Int64(whisper_full_get_segment_t1(context, i))
+            let transcription = TranscriptionData(t0: t0, t1: t1, text: text);
+            transcriptions.append(transcription)
+        }
+        return transcriptions
     }
 
     static func createContext(path: String) throws -> WhisperContext {
