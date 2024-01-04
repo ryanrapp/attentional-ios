@@ -17,6 +17,11 @@
 		0AAC5D9F29539CD0003032C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AAC5D9E29539CD0003032C3 /* Assets.xcassets */; };
 		0AAC5DCE2953A05C003032C3 /* WhisperState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5DCD2953A05C003032C3 /* WhisperState.swift */; };
 		0AAC5DD12953A394003032C3 /* LibWhisper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5DD02953A394003032C3 /* LibWhisper.swift */; };
+		3E457F332B45F96100A237D0 /* FormSpacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E457F322B45F96100A237D0 /* FormSpacer.swift */; };
+		3E457F3C2B465AC600A237D0 /* Regulate in Frameworks */ = {isa = PBXBuildFile; productRef = 3E457F3B2B465AC600A237D0 /* Regulate */; };
+		3E457F442B46F7CE00A237D0 /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = 3E457F432B46F7CE00A237D0 /* Markdown */; };
+		3E457F462B47208700A237D0 /* HeadingExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E457F452B47208700A237D0 /* HeadingExtractor.swift */; };
+		3E457F482B47287E00A237D0 /* SimpleHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E457F472B47287E00A237D0 /* SimpleHeading.swift */; };
 		3EAE94332B4194AD0014F4A2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE94322B4194AD0014F4A2 /* HomeView.swift */; };
 		3EAE94352B41B0500014F4A2 /* ColorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE94342B41B0500014F4A2 /* ColorScreen.swift */; };
 		3EAE94382B41B24A0014F4A2 /* TailwindCSS-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3EAE94372B41B24A0014F4A2 /* TailwindCSS-SwiftUI */; };
@@ -47,6 +52,9 @@
 		0AAC5DA029539CD0003032C3 /* Attentional.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Attentional.entitlements; sourceTree = "<group>"; };
 		0AAC5DCD2953A05C003032C3 /* WhisperState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperState.swift; sourceTree = "<group>"; };
 		0AAC5DD02953A394003032C3 /* LibWhisper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibWhisper.swift; sourceTree = "<group>"; };
+		3E457F322B45F96100A237D0 /* FormSpacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSpacer.swift; sourceTree = "<group>"; };
+		3E457F452B47208700A237D0 /* HeadingExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingExtractor.swift; sourceTree = "<group>"; };
+		3E457F472B47287E00A237D0 /* SimpleHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHeading.swift; sourceTree = "<group>"; };
 		3EAE94322B4194AD0014F4A2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3EAE94342B41B0500014F4A2 /* ColorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScreen.swift; sourceTree = "<group>"; };
 		3EAE94392B41B3F90014F4A2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -70,6 +78,8 @@
 				3EAE94382B41B24A0014F4A2 /* TailwindCSS-SwiftUI in Frameworks */,
 				3EAE94522B45974E0014F4A2 /* OpenAI in Frameworks */,
 				E3F92DC52AFA8E3800A6A9D4 /* whisper in Frameworks */,
+				3E457F442B46F7CE00A237D0 /* Markdown in Frameworks */,
+				3E457F3C2B465AC600A237D0 /* Regulate in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				0AA7514B2953B569001EE061 /* RiffWaveUtils.swift */,
+				3E457F452B47208700A237D0 /* HeadingExtractor.swift */,
 				0AA7514D2953D958001EE061 /* Recorder.swift */,
 			);
 			path = Utils;
@@ -105,7 +116,6 @@
 		0AAC5D8E29539CCF003032C3 = {
 			isa = PBXGroup;
 			children = (
-				3EAE94532B45BA440014F4A2 /* SectionHeader.swift */,
 				3EAE94412B4237C60014F4A2 /* Model.xcdatamodeld */,
 				3EAE94442B42384E0014F4A2 /* AppDelegate.swift */,
 				E3F92DC22AFA8DD800A6A9D4 /* whisper.cpp */,
@@ -149,6 +159,8 @@
 		0AAC5DD22953A9E3003032C3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				3EAE94532B45BA440014F4A2 /* SectionHeader.swift */,
+				3E457F472B47287E00A237D0 /* SimpleHeading.swift */,
 				3EAE944A2B4504980014F4A2 /* RecordViewModel.swift */,
 				0AAC5D9C29539CCF003032C3 /* ContentView.swift */,
 				3EAE94462B4345DE0014F4A2 /* EditAvRecordView.swift */,
@@ -159,6 +171,7 @@
 				3EAE943F2B42155C0014F4A2 /* ListView.swift */,
 				3EAE944C2B4593D00014F4A2 /* ConfigView.swift */,
 				3EAE944E2B4594DE0014F4A2 /* UserDefaultsExtensions.swift */,
+				3E457F322B45F96100A237D0 /* FormSpacer.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -199,6 +212,8 @@
 				E3F92DC42AFA8E3800A6A9D4 /* whisper */,
 				3EAE94372B41B24A0014F4A2 /* TailwindCSS-SwiftUI */,
 				3EAE94512B45974E0014F4A2 /* OpenAI */,
+				3E457F3B2B465AC600A237D0 /* Regulate */,
+				3E457F432B46F7CE00A237D0 /* Markdown */,
 			);
 			productName = WhisperCppDemo;
 			productReference = 0AAC5D9729539CCF003032C3 /* attentional.swiftui.app */;
@@ -232,6 +247,8 @@
 			packageReferences = (
 				3EAE94362B41B24A0014F4A2 /* XCRemoteSwiftPackageReference "TailwindCSS-SwiftUI" */,
 				3EAE94502B45974E0014F4A2 /* XCRemoteSwiftPackageReference "OpenAI" */,
+				3E457F3A2B465AC600A237D0 /* XCRemoteSwiftPackageReference "Regulate" */,
+				3E457F422B46F7CE00A237D0 /* XCRemoteSwiftPackageReference "swift-markdown" */,
 			);
 			productRefGroup = 0AAC5D9829539CCF003032C3 /* Products */;
 			projectDirPath = "";
@@ -265,6 +282,7 @@
 				3EAE943E2B420A9D0014F4A2 /* ViewExtensions.swift in Sources */,
 				0AAC5D9D29539CCF003032C3 /* ContentView.swift in Sources */,
 				3EAE943A2B41B3F90014F4A2 /* MainView.swift in Sources */,
+				3E457F332B45F96100A237D0 /* FormSpacer.swift in Sources */,
 				3EAE94332B4194AD0014F4A2 /* HomeView.swift in Sources */,
 				0AAC5D9B29539CCF003032C3 /* AttentionalApp.swift in Sources */,
 				3EAE94352B41B0500014F4A2 /* ColorScreen.swift in Sources */,
@@ -276,9 +294,11 @@
 				3EAE94402B42155D0014F4A2 /* ListView.swift in Sources */,
 				3EAE944D2B4593D00014F4A2 /* ConfigView.swift in Sources */,
 				3EAE94542B45BA440014F4A2 /* SectionHeader.swift in Sources */,
+				3E457F462B47208700A237D0 /* HeadingExtractor.swift in Sources */,
 				0AA7514C2953B569001EE061 /* RiffWaveUtils.swift in Sources */,
 				0AA7514E2953D958001EE061 /* Recorder.swift in Sources */,
 				3EAE94432B4237C60014F4A2 /* Model.xcdatamodeld in Sources */,
+				3E457F482B47287E00A237D0 /* SimpleHeading.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +431,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"whisper.swiftui.demo/Supporting files/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = UT89RH6ZN7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = NO;
@@ -461,7 +481,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"whisper.swiftui.demo/Supporting files/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = UT89RH6ZN7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -529,6 +549,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3E457F3A2B465AC600A237D0 /* XCRemoteSwiftPackageReference "Regulate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bipa-app/Regulate";
+			requirement = {
+				branch = "increase-ios-minimum-version-to-14";
+				kind = branch;
+			};
+		};
+		3E457F422B46F7CE00A237D0 /* XCRemoteSwiftPackageReference "swift-markdown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-markdown.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		3EAE94362B41B24A0014F4A2 /* XCRemoteSwiftPackageReference "TailwindCSS-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joemasilotti/TailwindCSS-SwiftUI";
@@ -548,6 +584,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3E457F3B2B465AC600A237D0 /* Regulate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3E457F3A2B465AC600A237D0 /* XCRemoteSwiftPackageReference "Regulate" */;
+			productName = Regulate;
+		};
+		3E457F432B46F7CE00A237D0 /* Markdown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3E457F422B46F7CE00A237D0 /* XCRemoteSwiftPackageReference "swift-markdown" */;
+			productName = Markdown;
+		};
 		3EAE94372B41B24A0014F4A2 /* TailwindCSS-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3EAE94362B41B24A0014F4A2 /* XCRemoteSwiftPackageReference "TailwindCSS-SwiftUI" */;

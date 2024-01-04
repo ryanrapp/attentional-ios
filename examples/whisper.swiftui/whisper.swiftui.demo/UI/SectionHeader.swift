@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TailwindCSS_SwiftUI
 
 struct SectionHeader: View {
   
@@ -30,7 +31,16 @@ struct SectionHeader: View {
     .foregroundColor(.accentColor)
     .frame(maxWidth: .infinity, alignment: .trailing)
     .overlay(
-      Text(title),
+        VStack {
+            Text(title.capitalized)
+                .foregroundColor(Theme.Color.gray500) // Set the color as needed
+                .textCase(nil)
+                .font(.system(size: 18, weight: .bold, design: .default))
+                .padding(.leading, 0)
+                .padding(.vertical, 20)
+            Spacer()
+        }
+      ,
       alignment: .leading
     )
   }
