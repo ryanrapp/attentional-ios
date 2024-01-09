@@ -22,6 +22,7 @@
 		3E457F442B46F7CE00A237D0 /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = 3E457F432B46F7CE00A237D0 /* Markdown */; };
 		3E457F462B47208700A237D0 /* HeadingExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E457F452B47208700A237D0 /* HeadingExtractor.swift */; };
 		3E457F482B47287E00A237D0 /* SimpleHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E457F472B47287E00A237D0 /* SimpleHeading.swift */; };
+		3E6CB7062B4970A300B32E5B /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6CB7052B4970A300B32E5B /* FontExtensions.swift */; };
 		3EAE94332B4194AD0014F4A2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE94322B4194AD0014F4A2 /* HomeView.swift */; };
 		3EAE94352B41B0500014F4A2 /* ColorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE94342B41B0500014F4A2 /* ColorScreen.swift */; };
 		3EAE94382B41B24A0014F4A2 /* TailwindCSS-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3EAE94372B41B24A0014F4A2 /* TailwindCSS-SwiftUI */; };
@@ -55,6 +56,7 @@
 		3E457F322B45F96100A237D0 /* FormSpacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSpacer.swift; sourceTree = "<group>"; };
 		3E457F452B47208700A237D0 /* HeadingExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingExtractor.swift; sourceTree = "<group>"; };
 		3E457F472B47287E00A237D0 /* SimpleHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHeading.swift; sourceTree = "<group>"; };
+		3E6CB7052B4970A300B32E5B /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		3EAE94322B4194AD0014F4A2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3EAE94342B41B0500014F4A2 /* ColorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScreen.swift; sourceTree = "<group>"; };
 		3EAE94392B41B3F90014F4A2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				3EAE94532B45BA440014F4A2 /* SectionHeader.swift */,
+				3E6CB7052B4970A300B32E5B /* FontExtensions.swift */,
 				3E457F472B47287E00A237D0 /* SimpleHeading.swift */,
 				3EAE944A2B4504980014F4A2 /* RecordViewModel.swift */,
 				0AAC5D9C29539CCF003032C3 /* ContentView.swift */,
@@ -284,6 +287,7 @@
 				3EAE943A2B41B3F90014F4A2 /* MainView.swift in Sources */,
 				3E457F332B45F96100A237D0 /* FormSpacer.swift in Sources */,
 				3EAE94332B4194AD0014F4A2 /* HomeView.swift in Sources */,
+				3E6CB7062B4970A300B32E5B /* FontExtensions.swift in Sources */,
 				0AAC5D9B29539CCF003032C3 /* AttentionalApp.swift in Sources */,
 				3EAE94352B41B0500014F4A2 /* ColorScreen.swift in Sources */,
 				0AAC5DCE2953A05C003032C3 /* WhisperState.swift in Sources */,

@@ -9,11 +9,13 @@ struct TranscriptionData {
     var t0: Int64
     var t1: Int64
     var text: String
+    var turn: Bool
 
-    init(t0: Int64, t1: Int64, text: String) {
+    init(t0: Int64, t1: Int64, text: String, turn: Bool) {
         self.t0 = t0
         self.t1 = t1
         self.text = text
+        self.turn = turn
     }
 }
 
@@ -46,6 +48,8 @@ actor WhisperContext {
             params.offset_ms        = 0
             params.no_context       = true
             params.single_segment   = false
+            // Turn on tiny diarize (speaker identification)
+            params.tdrz_enable      = true
 
             whisper_reset_timings(context)
             print("About to run whisper_full")
@@ -74,7 +78,9 @@ actor WhisperContext {
             let text = String(cString: whisper_full_get_segment_text(context, i))
             let t0 = Int64(whisper_full_get_segment_t0(context, i))
             let t1 = Int64(whisper_full_get_segment_t1(context, i))
-            let transcription = TranscriptionData(t0: t0, t1: t1, text: text);
+            let turn = whisper_full_get_segment_speaker_turn_next(context, i);
+            let transcription = TranscriptionData(t0: t0, t1: t1, text: text, turn: turn);
+            
             transcriptions.append(transcription)
         }
         return transcriptions

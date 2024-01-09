@@ -18,7 +18,7 @@ var transcriptionHandler: (([TranscriptionData]) -> Void)?
     
     
     private var modelUrl: URL? {
-        Bundle.main.url(forResource: "ggml-tiny", withExtension: "bin", subdirectory: "models")
+        Bundle.main.url(forResource: "ggml-small.en-tdrz", withExtension: "bin", subdirectory: "models")
     }
     
     private var sampleUrl: URL? {

@@ -158,9 +158,9 @@ class RecordViewModel: ObservableObject {
     - item 3
     """
     
-    private func generateQuery(record: AvRecord) -> ChatQuery {
+    private func generateQuery(record: AvRecord, useGpt4: Bool) -> ChatQuery {
         let userQuery = userPrompt + "Transcription:\n" + getTranscriptionText(record: record);
-        let query = ChatQuery(model: .gpt3_5Turbo, messages:
+        let query = ChatQuery(model: useGpt4 ? .gpt4 : .gpt3_5Turbo, messages:
             [
                 .init(role: .user, content: userQuery),
                 .init(role: .system, content: systemPrompt)
@@ -192,10 +192,11 @@ class RecordViewModel: ObservableObject {
         // Make sure the rows are up to date
         updateContextAndRecord(context: context, record: record)
         let openAI = OpenAI(apiToken: apiKey)
-        let query = generateQuery(record: record)
+        let query = generateQuery(record: record, useGpt4: useGpt4)
         
         var summary: String = ""
         self.updateSubject.send(UpdateMessage(messageType: MessageType.NewMessage, body: summary))
+
         do {
             for try await result in openAI.chatsStream(query: query) {
                 if let choice = result.choices.first, let content = choice.delta.content {
@@ -246,14 +247,14 @@ class RecordViewModel: ObservableObject {
     
     private func parseMarkdown(source: String) -> MemorySummaryStruct {
         let document = Document(parsing: source)
-        print(document.debugDescription())
+//        print(document.debugDescription())
         var headingBulletsExtractor = HeadingBulletsExtractor()
         headingBulletsExtractor.visit(document)
         headingBulletsExtractor.finalizeExtractedHeadings()
-        print("Extracted headings:", headingBulletsExtractor.extractedHeadings)
+//        print("Extracted headings:", headingBulletsExtractor.extractedHeadings)
 
         let result = populateMemorySummary(from: headingBulletsExtractor.extractedHeadings)
-        print("Extracted MemorySummaryStruct:", result)
+//        print("Extracted MemorySummaryStruct:", result)
         return result
     }
 }

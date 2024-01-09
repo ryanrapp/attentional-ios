@@ -16,25 +16,54 @@
         <attribute name="t0" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="t1" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="turn" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AvRecord" inverseName="rows" inverseEntity="AvRecord"/>
     </entity>
-    <entity name="MemoryActionItem" representedClassName="MemoryActionItem" parentEntity="MemoryRow" syncable="YES" codeGenerationType="class"/>
-    <entity name="MemoryArgument" representedClassName="MemoryArgument" parentEntity="MemoryRow" syncable="YES" codeGenerationType="class"/>
-    <entity name="MemoryFollowUp" representedClassName="MemoryFollowUp" parentEntity="MemoryRow" syncable="YES" codeGenerationType="class"/>
-    <entity name="MemoryRow" representedClassName="MemoryRow" isAbstract="YES" syncable="YES" codeGenerationType="class">
-        <attribute name="delta" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    <entity name="MemoryActionItem" representedClassName="MemoryActionItem" syncable="YES" codeGenerationType="class">
+        <attribute name="delta" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES">
+            <userInfo>
+                <entry key="key" value="delta"/>
+            </userInfo>
+        </attribute>
         <attribute name="text" optional="YES" attributeType="String"/>
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MemorySummary" inverseName="rows" inverseEntity="MemorySummary"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MemorySummary" inverseName="actionItems" inverseEntity="MemorySummary"/>
+    </entity>
+    <entity name="MemoryArgument" representedClassName="MemoryArgument" syncable="YES" codeGenerationType="class">
+        <attribute name="delta" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES">
+            <userInfo>
+                <entry key="key" value="delta"/>
+            </userInfo>
+        </attribute>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MemorySummary" inverseName="arguments" inverseEntity="MemorySummary"/>
+    </entity>
+    <entity name="MemoryFollowUp" representedClassName="MemoryFollowUp" syncable="YES" codeGenerationType="class">
+        <attribute name="delta" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MemorySummary" inverseName="followUp" inverseEntity="MemorySummary"/>
+        <userInfo>
+            <entry key="key" value="delta"/>
+        </userInfo>
     </entity>
     <entity name="MemorySummary" representedClassName="MemorySummary" syncable="YES" codeGenerationType="class">
         <attribute name="sentiment" optional="YES" attributeType="String"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="actionItems" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MemoryActionItem"/>
-        <relationship name="arguments" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MemoryArgument"/>
+        <relationship name="actionItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemoryActionItem" inverseName="parent" inverseEntity="MemoryActionItem"/>
+        <relationship name="arguments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemoryArgument" inverseName="parent" inverseEntity="MemoryArgument"/>
         <relationship name="avRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AvRecord" inverseName="memorySummary" inverseEntity="AvRecord"/>
-        <relationship name="rows" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemoryRow" inverseName="parent" inverseEntity="MemoryRow"/>
-        <relationship name="topics" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MemoryTopic"/>
+        <relationship name="followUp" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemoryFollowUp" inverseName="parent" inverseEntity="MemoryFollowUp"/>
+        <relationship name="topics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemoryTopic" inverseName="parent" inverseEntity="MemoryTopic"/>
+        <userInfo>
+            <entry key="key" value="delta"/>
+        </userInfo>
     </entity>
-    <entity name="MemoryTopic" representedClassName="MemoryTopic" parentEntity="MemoryRow" syncable="YES" codeGenerationType="class"/>
+    <entity name="MemoryTopic" representedClassName="MemoryTopic" syncable="YES" codeGenerationType="class">
+        <attribute name="delta" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MemorySummary" inverseName="topics" inverseEntity="MemorySummary"/>
+        <userInfo>
+            <entry key="key" value="delta"/>
+        </userInfo>
+    </entity>
 </model>

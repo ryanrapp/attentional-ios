@@ -14,6 +14,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ListView().environmentObject(actionHandler)
+                
         
         //            ColorScreen(color: .blue)
         //            ScrollView {
@@ -44,7 +45,8 @@ struct HomeView: View {
         //                    .padding() // Apply padding to the content inside the VStack
         //                }
         //            }
-        .navigationTitle("Second Brain").frame(alignment: .top)
+        .navigationTitle("SecondBrain")
+            .frame(alignment: .top)
         //            .toolbar(content: {
         //                ToolbarItem(placement: .navigationBarLeading) {
         //                    Text("Attentional")

@@ -15,8 +15,9 @@ struct SimpleHeading: View {
     var body: some View {
         HStack {
             Image(systemName: icon)
+                .foregroundColor(Theme.Color.gray400)
             Text(title.capitalized)
-                .foregroundColor(Theme.Color.gray500) // Set the color as needed
+                .foregroundColor(Theme.Color.gray400) // Set the color as needed
                 .font(.system(size: 16, weight: .bold, design: .default))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
