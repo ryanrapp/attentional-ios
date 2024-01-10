@@ -18,6 +18,7 @@
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="turn" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AvRecord" inverseName="rows" inverseEntity="AvRecord"/>
+        <relationship name="speaker" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="utterances" inverseEntity="Person"/>
     </entity>
     <entity name="MemoryActionItem" representedClassName="MemoryActionItem" syncable="YES" codeGenerationType="class">
         <attribute name="delta" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES">
@@ -65,5 +66,9 @@
         <userInfo>
             <entry key="key" value="delta"/>
         </userInfo>
+    </entity>
+    <entity name="Person" representedClassName="Person" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="utterances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AvRecordRow" inverseName="speaker" inverseEntity="AvRecordRow"/>
     </entity>
 </model>

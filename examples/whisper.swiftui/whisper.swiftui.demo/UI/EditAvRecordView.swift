@@ -23,16 +23,26 @@ struct EditAvRecordView: View {
     @State var showingSectionTranscription = true
     @State var showingSectionSummary = true
     @State var showingSectionOverview = true
+    @State var selectingPersonRow: AvRecordRow? = nil
+    @State private var selectedTab = 0
+    @State private var showingPersonSelector = false
+    @State private var selectedPerson: Person?
+    @State private var newPersonName: String = ""
     @State private var isKeyboardVisible = false
     @State private var keyboardHeight: CGFloat = 0
     @State private var summarizeInProgress = false
     
     let buttonFontSize = CGFloat(16)
     let items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
-    let groupColors = [Theme.Color.indigo700, Theme.Color.teal700, Theme.Color.orange700, Theme.Color.pink700, Theme.Color.blue700, Theme.Color.red700]
+    let groupColors = [Theme.Color.indigo400, Theme.Color.teal400, Theme.Color.orange400, Theme.Color.pink400, Theme.Color.blue400, Theme.Color.red400]
+    let groupColors2 = [Theme.Color.indigo700, Theme.Color.teal700, Theme.Color.orange700, Theme.Color.pink700, Theme.Color.blue700, Theme.Color.red700]
     let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
     let transcribeButtonDisabled = false
-
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Person.name, ascending: true)],
+        animation: .default)
+    private var people: FetchedResults<Person>
     
     var body: some View {
         let missingApiKey = apiKey == ""
@@ -157,72 +167,24 @@ struct EditAvRecordView: View {
                                 title: "Transcription", 
                                 icon: Image(systemName: "doc.text"),
                                 content: {
-                                    Menu{
-                                        Button("Redo transcription", action: {
-                                            
-                                        })
-                                        Button("Cancel", action: {
-                                            
-                                        })
-                                    } label: {
-                                        Label("", systemImage: "ellipsis")
-                                    } primaryAction: {
-                                        
-                                    }
+//                                    Menu{
+//                                        Button("Redo transcription", action: {
+//                                            
+//                                        })
+//                                        Button("Cancel", action: {
+//                                            
+//                                        })
+//                                    } label: {
+//                                        Label("", systemImage: "ellipsis")
+//                                    } primaryAction: {
+//                                        
+//                                    }
                                 }
                             )
                         ) {
                             VStack(spacing: 20) {
                                 ForEach(Array(zip(groups.indices, groups)), id: \.1) { index, group in
-                                    VStack(spacing: 0) {
-                                        
-                                        Menu{
-                                            //                                            Button("Choose user", action: {
-                                            //
-                                            //                                            })
-                                            Button("Cancel", action: {
-                                                
-                                            })
-                                        } label: {
-                                            HStack(spacing: 4) {
-                                                Text("\(letters[index % letters.count])")
-                                                    .font(.footnote)
-                                                    .foregroundColor(.white)
-                                                    .padding(8)
-                                                    .background(groupColors[index % groupColors.count])
-                                                    .clipShape(Circle())
-                                                    .font(.system(size: 20, weight: .semibold, design: .default))
-                                                Text("Speaker \(letters[index % letters.count])")
-                                                    .font(.system(size: 14, weight: .semibold, design: .default))
-                                                    .foregroundColor(Color.black)
-                                                    
-                                                
-                                            }
-                                                .padding(8)
-                                                .cornerRadius(4)
-                                                
-                                            
-//                                            Label("Speaker \(index + 1)", systemImage: "person.crop.circle")
-//                                                .padding(.vertical, 4)
-//                                                .padding(.horizontal, 8)
-//                                                .foregroundColor(Color.black)
-//                                                .background(groupColors[index % groupColors.count])
-//                                                .cornerRadius(4)
-//                                                .shadow(radius: 1)
-//                                                .disabled(summarizeButtonDisabled)
-//                                                .font(.system(size: 14, weight: .semibold, design: .default))
-//                                                .lineSpacing(14 * 0.3)
-                                        } primaryAction: {
-                                            
-                                        }.frame(maxWidth: .infinity, alignment: .leading)
-                                        
-                                        
-                                        ForEach(group) { transcriptRow in
-                                            Text(transcriptRow.text?.trimmingCharacters(in:.whitespacesAndNewlines) ?? "No text")
-                                                .frame(maxWidth: .infinity, alignment: .leading)
-                                            
-                                        }
-                                    }
+                                    getAnnotationGroup(index: index, group: group)
                                 }
                             }
                         }
@@ -269,55 +231,59 @@ struct EditAvRecordView: View {
                 } // end inner VStack
                 .padding()
             } // end ScrollView
+                .overlay(
+                    getSelectOrNewPersonView()
+                )
             
         } // end outer VStack
-        
-            
             .overlay(
-                Button(action: {
-                    whisperState.transcriptionHandler = { transcriptions in
-                        // Handle the transcription here
-                        // Example: print the transcription or update some state
-                        print("Foobar Transcription: \(transcriptions)")
-                        if let existingRows = record.rows as? Set<AvRecordRow> {
-                            for row in existingRows {
-                                viewContext.delete(row)
+                VStack {
+                    if !showingPersonSelector {
+                        Button(action: {
+                            whisperState.transcriptionHandler = { transcriptions in
+                                // Handle the transcription here
+                                // Example: print the transcription or update some state
+                                print("Foobar Transcription: \(transcriptions)")
+                                if let existingRows = record.rows as? Set<AvRecordRow> {
+                                    for row in existingRows {
+                                        viewContext.delete(row)
+                                    }
+                                }
+                                for row in transcriptions {
+                                    let newRow = AvRecordRow(context: viewContext)
+                                    newRow.parent = record
+                                    newRow.t0 = row.t0
+                                    newRow.t1 = row.t1
+                                    newRow.text = row.text
+                                    newRow.turn = row.turn
+                                }
+                                
+                                // Save the duration in Minutes
+                                record.durationInMinutes = viewModel.durationInMinutes
+                                
+                                do {
+                                    try viewContext.save()
+                                } catch {
+                                    print("Could not save transcription rows: \(error)")
+                                }
+                                
+                                // Refresh the rows
+                                viewModel.updateContextAndRecord(context: viewContext, record: record)
                             }
+                            recordHandler.performAction()
+                        }) {
+                            let buttonImage = whisperState.isRecording ? "stop.fill" : "mic.fill";
+                            Image(systemName: buttonImage)
+                                .font(.title.weight(.semibold))
+                                .padding()
+                                .background(Color.white)
+                                .foregroundColor(.indigo)
+                                .clipShape(Circle())
+                                .shadow(radius: 4, x: 0, y: 4)
+                                .disabled(!whisperState.canTranscribe)
                         }
-                        for row in transcriptions {
-                            let newRow = AvRecordRow(context: viewContext)
-                            newRow.parent = record
-                            newRow.t0 = row.t0
-                            newRow.t1 = row.t1
-                            newRow.text = row.text
-                            newRow.turn = row.turn
-                        }
-                        
-                        // Save the duration in Minutes
-                        record.durationInMinutes = viewModel.durationInMinutes
-                        
-                        do {
-                            try viewContext.save()
-                        } catch {
-                            print("Could not save transcription rows: \(error)")
-                        }
-                        
-                        // Refresh the rows
-                        viewModel.updateContextAndRecord(context: viewContext, record: record)
                     }
-                    recordHandler.performAction()
-                }) {
-                    let buttonImage = whisperState.isRecording ? "stop.fill" : "mic.fill";
-                    Image(systemName: buttonImage)
-                        .font(.title.weight(.semibold))
-                        .padding()
-                        .background(Color.white)
-                        .foregroundColor(.indigo)
-                        .clipShape(Circle())
-                        .shadow(radius: 4, x: 0, y: 4)
-                        .disabled(!whisperState.canTranscribe)
-                }.padding()
-                , alignment: .bottom)
+                }.padding(), alignment: .bottom)
         .onAppear {
             viewModel.summaryCallback =  { (message: UpdateMemorySummary) in
                 if (record.memorySummary) == nil {
@@ -437,6 +403,16 @@ struct EditAvRecordView: View {
 //           }
 //    }
     
+    private func saveAndRefresh() {
+        do {
+            try viewContext.save()
+        } catch {
+            print("Could not add new person: \(error)")
+        }
+        // Refresh the rows
+        viewModel.updateContextAndRecord(context: viewContext, record: record)
+    }
+    
     private func speakerFlag(rows: [AvRecordRow]) -> [Bool] {
         var i = 0;
         return rows.map { item in
@@ -506,10 +482,8 @@ struct EditAvRecordView: View {
             }) {
                 Image(systemName: "xmark") // Replace with your X icon
             }
-            .padding(.leading) // Adds padding to the left side
-            .frame(maxWidth: .infinity, alignment: .leading) // Left aligned
-
-            Spacer() // Creates space between left and center content
+            Color.clear.frame(width: 30, height: 1) // Invisible spacer
+            Spacer()
 
             Text("Memory")
                 .foregroundColor(Theme.Color.gray700) // Set the color as needed
@@ -518,26 +492,37 @@ struct EditAvRecordView: View {
                 .padding(.bottom, 14)
                 .padding(.top, 18)
             .frame(maxWidth: .infinity, alignment: .center) // Center aligned
-
-            Spacer() // Creates space between center and right content
-
-            Menu{
-                Button("E-mail", action: {  })
-                Button("Message", action: {  })
-                Button("Cancel", action: { })
-            } label: {
-                HStack {
-                    Text("Share").font(.buttonFont(ofSize: 14))
-                    Image(systemName: "square.and.arrow.up") // Replace with your Share icon
-                }
-            } primaryAction: {
-                
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing) // Right aligned
-            
             
             Spacer()
+
+            HStack(spacing: 20) {
+                Menu{
+                    Button("E-mail", action: {  })
+                    Button("Message", action: {  })
+                    Button("Cancel", action: { })
+                } label: {
+                    HStack {
+                        Image(systemName: "square.and.arrow.up") // Replace with your Share icon
+                    }
+                } primaryAction: {
+                    
+                }
+                
+                Menu{
+                    Button("Re-do summary", action: {  })
+                    Button("Cancel", action: { })
+                } label: {
+                    HStack {
+                        Image(systemName: "ellipsis.circle") // Replace with your Share icon
+                    }
+                } primaryAction: {
+                    
+                }
+            }
         }
+        .frame(maxWidth: .infinity) // Takes up full width of the screen
+        .padding(.horizontal)
+        
     }
     
     private func bulletedList(from: [String?]) -> some View {
@@ -603,6 +588,347 @@ struct EditAvRecordView: View {
             // For example, update `newItem.text` if it's different from `item`
         }
 
+    }
+    
+    private func getPersonTag(index: Int, row: AvRecordRow?) -> some View {
+        var circledLabel = ""
+        var longLabel = ""
+        if let name = row?.speaker?.name {
+            circledLabel = name.first.map { String($0) } ?? ""
+            longLabel = name
+        } else {
+            circledLabel = "\(letters[index % letters.count])"
+            longLabel = "Speaker \(letters[index % letters.count])"
+        }
+        
+        return HStack(spacing: 8) {
+            Text(circledLabel)
+                .font(.system(size: 12, weight: .bold, design: .default))
+                .foregroundColor(.white)
+                .padding(8)
+                .background(LinearGradient(gradient: Gradient(colors: [groupColors[index % groupColors.count], groupColors2[index % groupColors.count]]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                .clipShape(Circle())
+                .shadow(radius: 1)
+            Text(longLabel)
+                .font(.system(size: 14, weight: .semibold, design: .default))
+                .foregroundColor(Color.black)
+//            Image(systemName: "ellipsis.circle")
+//                .foregroundColor(Theme.Color.gray400)
+            
+        }.frame(minWidth: 0, alignment: .leading)
+            .padding(.vertical, 0)
+            .padding(.trailing, 8)
+            .background(LinearGradient(gradient: Gradient(colors: [Theme.Color.gray100, Theme.Color.gray200]), startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(30)
+    }
+    
+    private func getSelectOrNewPersonView() -> some View {
+        VStack {
+            if showingPersonSelector {
+                VStack {
+                    Picker("Options", selection: $selectedTab) {
+                        Text("Select").tag(0)
+                        Text("Add").tag(1)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding()
+                    
+                    if selectedTab == 0 {
+                        // Tab 1 Content
+                        getSelectPersonView()
+                    } else {
+                        // Tab 2 Content
+                        getAddPersonView()
+                    }
+                    
+                    //                    getSelectPersonView().tabItem {
+                    //                        Label("Add", systemImage: "person.badge.plus")
+                    //                    }
+                    
+                    
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
+                .shadow(radius: 10)
+                .frame(width: 300) // Set width for the modal
+            }
+            
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.black.opacity(showingPersonSelector ? 0.4 : 0))
+            .edgesIgnoringSafeArea(.all)
+            .animation(.easeInOut, value: showingPersonSelector)
+    }
+    
+//    private func getNewPersonView() -> some View {
+//        
+//    }
+    
+    
+    private func getSelectPersonViewOld() -> some View {
+        return VStack {
+            if showingPersonSelector {
+                VStack(spacing: 20) {
+                    Text("Select a Person")
+                        .font(.headline)
+                    
+                    Picker("Person", selection: $selectedPerson) {
+                        Text("None").tag(nil as Person?)  // Add this to allow no selection
+                        ForEach(people, id: \.id) { person in
+                            Text(person.name ?? "").tag(person as Person?)
+                        }
+                    }.onChange(of: selectedPerson) { oldSelection, newSelection in
+                        if let unwrappedSelection = newSelection {
+                            if unwrappedSelection.name != nil {
+                                newPersonName = unwrappedSelection.name ?? ""
+                            }
+                        } else {
+                            // Handle the case where no person is selected
+                            print("No person selected")
+                            newPersonName = ""
+                        }
+                    }
+                    
+                    TextField("Add new person", text: $newPersonName)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5.0)
+
+                    HStack(spacing: 16) {
+                        Button(action: {
+                            // Handle selection or adding new person
+                            var needsSave = false
+                            if let found = people.filter({ person in
+                                return newPersonName == person.name
+                            }).first {
+//                                viewContext.delete(found)
+//                                needsSave = true
+                                
+                                print("Selected person")
+                                selectingPersonRow?.speaker = found
+                                needsSave = true
+                            } else if newPersonName != "" {
+                                let newPerson = Person(context: viewContext)
+                                newPerson.name = newPersonName
+                                selectingPersonRow?.speaker = newPerson
+                                needsSave = false
+                            } else {
+                                selectingPersonRow?.speaker = nil
+                                needsSave = false
+                            }
+                            if needsSave {
+                                do {
+                                    try viewContext.save()
+                                } catch {
+                                    print("Could not add new person: \(error)")
+                                }
+                            }
+                            showingPersonSelector = false
+                        }) {
+                            Image(systemName: "checkmark")
+                            Text("Ok")
+                                .font(.system(size: buttonFontSize, weight: .semibold, design: .default))
+                        }.padding()
+                        Button(action: {
+                            newPersonName = ""
+                            showingPersonSelector = false
+                        }) {
+                            Image(systemName: "xmark")
+                            Text("Cancel")
+                                .font(.system(size: buttonFontSize, weight: .semibold, design: .default))
+                        }.padding()
+                    }
+                }
+            }
+        }
+    }
+    
+    private func getAddPersonView() -> some View {
+        return VStack {
+            if showingPersonSelector {
+                VStack(spacing: 20) {
+                    Text("Add a Person")
+                        .font(.headline)
+                    
+                    TextField("Add new person", text: $newPersonName)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5.0)
+
+                    HStack(spacing: 16) {
+                        Button(action: {
+                            // Handle selection or adding new person
+                            var needsSave = false
+                            if let found = people.filter({ person in
+                                return newPersonName == person.name
+                            }).first {
+                                selectingPersonRow?.speaker = found
+                                needsSave = true
+                            } else if newPersonName != "" {
+                                let newPerson = Person(context: viewContext)
+                                newPerson.name = newPersonName
+                                selectingPersonRow?.speaker = newPerson
+                                needsSave = false
+                            } else {
+                                selectingPersonRow?.speaker = nil
+                                needsSave = false
+                            }
+                            if needsSave {
+                                do {
+                                    try viewContext.save()
+                                } catch {
+                                    print("Could not add new person: \(error)")
+                                }
+                            }
+                            showingPersonSelector = false
+                        }) {
+                            Image(systemName: "checkmark")
+                            Text("Add")
+                                .font(.system(size: buttonFontSize, weight: .semibold, design: .default))
+                        }.disabled(newPersonName == "")
+                            .padding()
+                        Button(action: {
+                            newPersonName = ""
+                            showingPersonSelector = false
+                        }) {
+                            Image(systemName: "xmark")
+                            Text("Cancel")
+                                .font(.system(size: buttonFontSize, weight: .semibold, design: .default))
+                        }.padding()
+                    }
+                }
+            }
+        }
+    }
+    
+    private func getSelectPersonView() -> some View {
+        return VStack {
+            if showingPersonSelector {
+                VStack(spacing: 20) {
+                    Text("Select a Person")
+                        .font(.headline)
+                    
+                    Picker("Person", selection: $selectedPerson) {
+                        Text("None").tag(nil as Person?)  // Add this to allow no selection
+                        ForEach(people, id: \.id) { person in
+                            Text(person.name ?? "").tag(person as Person?)
+                        }
+                    }.padding(.vertical, 10)
+                    
+                    HStack(spacing: 16) {
+                        Button(action: {
+                            // Handle selection or adding new person
+                            
+                        
+                            selectingPersonRow?.speaker = selectedPerson
+                            do {
+                                try viewContext.save()
+                            } catch {
+                                print("Could not add new person: \(error)")
+                            }
+                        
+                            showingPersonSelector = false
+                        }) {
+                            Image(systemName: "checkmark")
+                            Text("Ok")
+                                .font(.system(size: buttonFontSize, weight: .semibold, design: .default))
+                        }.padding()
+                        Button(action: {
+                            newPersonName = ""
+                            showingPersonSelector = false
+                        }) {
+                            Image(systemName: "xmark")
+                            Text("Cancel")
+                                .font(.system(size: buttonFontSize, weight: .semibold, design: .default))
+                        }.padding()
+                    }
+                }
+            }
+        }
+    }
+    
+    private func getAnnotationGroup(index: Int, group: [AvRecordRow]) -> some View {
+        let showRemoveSpeakerButton = index > 0
+        
+        return VStack(spacing: 0) {
+            Menu {
+                Button(action: {
+                    print("Showing Person Modal")
+                    showingPersonSelector = true
+                    selectingPersonRow = group.first
+                    selectedPerson = selectingPersonRow?.speaker
+                    newPersonName = ""
+                    
+                }) {
+                    Text("Select speaker")
+                    Image(systemName: "person.and.arrow.left.and.arrow.right")
+                }
+                if showRemoveSpeakerButton {
+                    Button(action: {
+                        // Action for Menu Item 1
+                        if let row = group.first {
+                            row.turn = false
+                            saveAndRefresh()
+                        }
+                    }) {
+                        Text("Remove speaker")
+                            .foregroundColor(.red)
+                        Image(systemName: "trash")
+                    }
+                }
+                
+                Button(action: {
+                    selectingPersonRow = nil
+                }) {
+                    Text("Cancel")
+                    Image(systemName: "xmark")
+                }
+            } label: {
+                getPersonTag(index: index, row: group.first)
+            } primaryAction: {
+                
+            }.frame(maxWidth: .infinity, alignment: .leading).padding(.bottom, 8)
+            
+            ForEach(group) { transcriptRow in
+                getTranscriptRowView(transcriptRow: transcriptRow)
+            }
+        }
+    }
+    
+    private func getTranscriptRowView(transcriptRow: AvRecordRow) -> some View {
+        Text(transcriptRow.text?.trimmingCharacters(in:.whitespacesAndNewlines) ?? "No text")
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contextMenu {
+                
+                if !transcriptRow.turn {
+                    Button(action: {
+                        transcriptRow.turn = true
+                        saveAndRefresh()
+                    }) {
+                        Text("New speaker")
+                        Image(systemName: "person.badge.plus")
+                    }
+                } else {
+                    Button(action: {
+                        // Action for Menu Item 1
+                        transcriptRow.turn = false
+                        saveAndRefresh()
+                    }) {
+                        Text("Remove speaker")
+                        Image(systemName: "trash")
+                    }
+                }
+                
+                Button(action: {
+                    // Action for Menu Item 2
+                    print("Cancel")
+                }) {
+                    Text("Cancel")
+                    Image(systemName: "xmark")
+                }
+            }
+        
     }
 }
 
