@@ -46,6 +46,16 @@
             <entry key="key" value="delta"/>
         </userInfo>
     </entity>
+    <entity name="MemoryMainPoint" representedClassName="MemoryMainPoint" syncable="YES" codeGenerationType="class">
+        <attribute name="delta" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MemorySummary" inverseName="mainPoints" inverseEntity="MemorySummary"/>
+    </entity>
+    <entity name="MemoryStory" representedClassName="MemoryStory" syncable="YES" codeGenerationType="class">
+        <attribute name="delta" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MemorySummary" inverseName="stories" inverseEntity="MemorySummary"/>
+    </entity>
     <entity name="MemorySummary" representedClassName="MemorySummary" syncable="YES" codeGenerationType="class">
         <attribute name="sentiment" optional="YES" attributeType="String"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
@@ -54,6 +64,8 @@
         <relationship name="arguments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemoryArgument" inverseName="parent" inverseEntity="MemoryArgument"/>
         <relationship name="avRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AvRecord" inverseName="memorySummary" inverseEntity="AvRecord"/>
         <relationship name="followUp" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemoryFollowUp" inverseName="parent" inverseEntity="MemoryFollowUp"/>
+        <relationship name="mainPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemoryMainPoint" inverseName="parent" inverseEntity="MemoryMainPoint"/>
+        <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemoryStory" inverseName="parent" inverseEntity="MemoryStory"/>
         <relationship name="topics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MemoryTopic" inverseName="parent" inverseEntity="MemoryTopic"/>
         <userInfo>
             <entry key="key" value="delta"/>

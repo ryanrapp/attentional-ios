@@ -36,6 +36,14 @@ public struct UpdateMemorySummary {
     var body: String = ""
 }
 
+public struct SpeakerAnnotationGroup {
+    var rows: [AvRecordRow]
+    var index: Int
+    var id: String = ""
+    var speakerName: String = ""
+    var speakerInitials: String = ""
+}
+
 private struct UpdateMessage {
     var messageType: MessageType = MessageType.NewMessage
     var body: String = ""
@@ -101,7 +109,15 @@ class RecordViewModel: ObservableObject {
         loadSortedRows()
     }
     
+    func updateContext(context: NSManagedObjectContext) {
+        self.viewContext = context
+        loadSortedRows()
+    }
+    
+    
+    
     let userPrompt = """
+    A speech-to-text transcript is provided formatted as `[Speaker]: Spoken text...`.
     Analyze the transcript provided below, then provide the following:
     "Title" - title for the meeting
     "Summary" - summary of meeting
@@ -172,15 +188,60 @@ class RecordViewModel: ObservableObject {
     
     private func getTranscriptionText(record: AvRecord) -> String {
         var transcription = ""
-        if let existingRows = record.rows as? Set<AvRecordRow> {
-            for row in existingRows {
+        for group in speakerGroups() {
+            transcription += "[\(group.speakerName)]: "
+            for row in group.rows {
                 if let rowText = row.text {
-                    transcription += rowText + "\n\n"
+                    transcription += rowText + "\n"
                 }
             }
+            transcription += "\n\n"
         }
+        
         print("Got transcription:", transcription)
         return transcription
+    }
+    
+    private func getDefaultSpeakerLetter(index: Int) -> String {
+        let alphabet = "abcdefghijklmnopqrstuvwxyz"
+        let char = alphabet[index % alphabet.count]
+        return char.uppercased()
+    }
+    
+    private func getDefaultSpeakerName(index: Int) -> String {
+        return "Speaker \(getDefaultSpeakerLetter(index: index))"
+    }
+    
+    func speakerGroups() -> [SpeakerAnnotationGroup] {
+        // Enumerate Groups
+        var groups: [SpeakerAnnotationGroup] = []
+        var group = SpeakerAnnotationGroup(rows: [], index: 0, id: "g-init")
+        
+        sortedRows.forEach { item in
+            if item.turn {
+                groups.append(group)
+                group = SpeakerAnnotationGroup(rows: [item], index: groups.count + 1, id: "g-\(item.id)")
+            } else {
+                group.rows.append(item)
+            }
+        }
+        if group.rows.count > 0 {
+            groups.append(group)
+        }
+        
+        // Compute Group names
+        for (index, group) in groups.enumerated() {
+            if let name = group.rows.first?.speaker?.name {
+                groups[index].speakerName = name
+                groups[index].speakerInitials = name.first.map { String($0) } ?? ""
+                
+            } else {
+                groups[index].speakerName = getDefaultSpeakerName(index: index)
+                groups[index].speakerInitials = getDefaultSpeakerLetter(index: index)
+            }
+        }
+        
+        return groups
     }
     
     func summarize(context: NSManagedObjectContext, record: AvRecord, apiKey: String, useGpt4: Bool) async {
@@ -220,22 +281,31 @@ class RecordViewModel: ObservableObject {
             switch heading {
             case "Title":
                 memorySummary.title = content.joined(separator: " ")
+                break
             case "Sentiment":
                 memorySummary.sentiment = content.joined(separator: " ")
+                break
             case "Summary":
                 memorySummary.summary = content.joined(separator: " ")
+                break
             case "Action Items":
                 memorySummary.actionItems = content
+                break
             case "Follow Up":
                 memorySummary.followUp = content
+                break
             case "Arguments":
                 memorySummary.arguments = content
+                break
             case "Related Topics":
                 memorySummary.relatedTopics = content
+                break
             case "Main Points":
                 memorySummary.mainPoints = content
+                break
             case "Stories":
                 memorySummary.stories = content
+                break
             default:
                 break // Ignore headings that don't match any field
             }
@@ -257,4 +327,85 @@ class RecordViewModel: ObservableObject {
 //        print("Extracted MemorySummaryStruct:", result)
         return result
     }
+    
+    func createSection<T>(from set: Set<T>?, title: String, imageName: String, textSelector: @escaping (T) -> String, sortKey: KeyPath<T, Int32>) -> AnyView {
+        if let itemSet = set {
+            let sortedItems = itemSet.sorted { first, second in
+                first[keyPath: sortKey] < second[keyPath: sortKey]
+            }.map(textSelector)
+            
+            return AnyView(
+                Section(header: summarySectionHeader(title: title, imageName: imageName)) {
+                    BulletedListView(from: sortedItems)
+                }
+            )
+        } else {
+            return AnyView(EmptyView())
+        }
+    }
+    
+    public func getSections() -> some View {
+        return Group {
+            if let mySet = record?.memorySummary?.mainPoints as? Set<MemoryMainPoint> {
+                createSection(
+                    from: mySet,
+                    title: "Main Points",
+                    imageName: "hand.point.right",
+                    textSelector: { $0.text ?? "" },
+                    sortKey: \.delta
+                )
+            }
+
+            if let actionItemsSet = record?.memorySummary?.actionItems as? Set<MemoryActionItem> {
+                createSection(
+                    from: actionItemsSet,
+                    title: "Action Items",
+                    imageName: "bolt",
+                    textSelector: { $0.text ?? "" },
+                    sortKey: \.delta
+                )
+            }
+
+            if let followUpSet = record?.memorySummary?.followUp as? Set<MemoryFollowUp> {
+                createSection(
+                    from: followUpSet,
+                    title: "Follow Up",
+                    imageName: "mail",
+                    textSelector: { $0.text ?? "" },
+                    sortKey: \.delta
+                )
+            }
+
+            if let argumentsSet = record?.memorySummary?.arguments as? Set<MemoryArgument> {
+                createSection(
+                    from: argumentsSet,
+                    title: "Arguments",
+                    imageName: "bolt",
+                    textSelector: { $0.text ?? "" },
+                    sortKey: \.delta
+                )
+            }
+
+            if let topicsSet = record?.memorySummary?.topics as? Set<MemoryTopic> {
+                createSection(
+                    from: topicsSet,
+                    title: "Related Topics",
+                    imageName: "tag",
+                    textSelector: { $0.text ?? "" },
+                    sortKey: \.delta
+                )
+            }
+
+            if let storiesSet = record?.memorySummary?.stories as? Set<MemoryStory> {
+                createSection(
+                    from: storiesSet,
+                    title: "Stories",
+                    imageName: "tag",
+                    textSelector: { $0.text ?? "" },
+                    sortKey: \.delta
+                )
+            }
+        }
+    }
+    
 }

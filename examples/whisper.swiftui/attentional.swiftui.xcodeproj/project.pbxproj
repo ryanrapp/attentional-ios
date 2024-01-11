@@ -23,6 +23,12 @@
 		3E457F462B47208700A237D0 /* HeadingExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E457F452B47208700A237D0 /* HeadingExtractor.swift */; };
 		3E457F482B47287E00A237D0 /* SimpleHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E457F472B47287E00A237D0 /* SimpleHeading.swift */; };
 		3E461A192B4DF2F90092FD78 /* SelectPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E461A182B4DF2F90092FD78 /* SelectPersonView.swift */; };
+		3E56B4642B4EED3500C85FC5 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E56B4632B4EED3500C85FC5 /* StringExtensions.swift */; };
+		3E56B4662B4F05C200C85FC5 /* BulletedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E56B4652B4F05C200C85FC5 /* BulletedListView.swift */; };
+		3E56B4682B4F580600C85FC5 /* PersonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E56B4672B4F580600C85FC5 /* PersonTagView.swift */; };
+		3E56B46A2B503CA300C85FC5 /* SelectOrNewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E56B4692B503CA300C85FC5 /* SelectOrNewPersonView.swift */; };
+		3E56B46C2B503F7800C85FC5 /* PeopleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E56B46B2B503F7800C85FC5 /* PeopleViewModel.swift */; };
+		3E56B46E2B505C4200C85FC5 /* AnnotationGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E56B46D2B505C4200C85FC5 /* AnnotationGroupView.swift */; };
 		3E6CB7062B4970A300B32E5B /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6CB7052B4970A300B32E5B /* FontExtensions.swift */; };
 		3EAE94332B4194AD0014F4A2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE94322B4194AD0014F4A2 /* HomeView.swift */; };
 		3EAE94352B41B0500014F4A2 /* ColorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE94342B41B0500014F4A2 /* ColorScreen.swift */; };
@@ -58,6 +64,13 @@
 		3E457F452B47208700A237D0 /* HeadingExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingExtractor.swift; sourceTree = "<group>"; };
 		3E457F472B47287E00A237D0 /* SimpleHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHeading.swift; sourceTree = "<group>"; };
 		3E461A182B4DF2F90092FD78 /* SelectPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPersonView.swift; sourceTree = "<group>"; };
+		3E56B4622B4E728600C85FC5 /* attentional-swiftui-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "attentional-swiftui-Info.plist"; sourceTree = "<group>"; };
+		3E56B4632B4EED3500C85FC5 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		3E56B4652B4F05C200C85FC5 /* BulletedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletedListView.swift; sourceTree = "<group>"; };
+		3E56B4672B4F580600C85FC5 /* PersonTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTagView.swift; sourceTree = "<group>"; };
+		3E56B4692B503CA300C85FC5 /* SelectOrNewPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOrNewPersonView.swift; sourceTree = "<group>"; };
+		3E56B46B2B503F7800C85FC5 /* PeopleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewModel.swift; sourceTree = "<group>"; };
+		3E56B46D2B505C4200C85FC5 /* AnnotationGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationGroupView.swift; sourceTree = "<group>"; };
 		3E6CB7052B4970A300B32E5B /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		3EAE94322B4194AD0014F4A2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3EAE94342B41B0500014F4A2 /* ColorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScreen.swift; sourceTree = "<group>"; };
@@ -94,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				0AAC5DCD2953A05C003032C3 /* WhisperState.swift */,
+				3E56B46B2B503F7800C85FC5 /* PeopleViewModel.swift */,
+				3EAE944A2B4504980014F4A2 /* RecordViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -113,6 +128,7 @@
 				0AA7514B2953B569001EE061 /* RiffWaveUtils.swift */,
 				3E457F452B47208700A237D0 /* HeadingExtractor.swift */,
 				0AA7514D2953D958001EE061 /* Recorder.swift */,
+				3E56B4632B4EED3500C85FC5 /* StringExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -120,6 +136,7 @@
 		0AAC5D8E29539CCF003032C3 = {
 			isa = PBXGroup;
 			children = (
+				3E56B4622B4E728600C85FC5 /* attentional-swiftui-Info.plist */,
 				3EAE94412B4237C60014F4A2 /* Model.xcdatamodeld */,
 				3EAE94442B42384E0014F4A2 /* AppDelegate.swift */,
 				E3F92DC22AFA8DD800A6A9D4 /* whisper.cpp */,
@@ -166,7 +183,6 @@
 				3EAE94532B45BA440014F4A2 /* SectionHeader.swift */,
 				3E6CB7052B4970A300B32E5B /* FontExtensions.swift */,
 				3E457F472B47287E00A237D0 /* SimpleHeading.swift */,
-				3EAE944A2B4504980014F4A2 /* RecordViewModel.swift */,
 				0AAC5D9C29539CCF003032C3 /* ContentView.swift */,
 				3EAE94462B4345DE0014F4A2 /* EditAvRecordView.swift */,
 				3E461A182B4DF2F90092FD78 /* SelectPersonView.swift */,
@@ -178,6 +194,10 @@
 				3EAE944C2B4593D00014F4A2 /* ConfigView.swift */,
 				3EAE944E2B4594DE0014F4A2 /* UserDefaultsExtensions.swift */,
 				3E457F322B45F96100A237D0 /* FormSpacer.swift */,
+				3E56B4652B4F05C200C85FC5 /* BulletedListView.swift */,
+				3E56B4672B4F580600C85FC5 /* PersonTagView.swift */,
+				3E56B4692B503CA300C85FC5 /* SelectOrNewPersonView.swift */,
+				3E56B46D2B505C4200C85FC5 /* AnnotationGroupView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -284,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E56B4642B4EED3500C85FC5 /* StringExtensions.swift in Sources */,
 				3EAE94472B4345DE0014F4A2 /* EditAvRecordView.swift in Sources */,
 				3EAE943E2B420A9D0014F4A2 /* ViewExtensions.swift in Sources */,
 				0AAC5D9D29539CCF003032C3 /* ContentView.swift in Sources */,
@@ -294,10 +315,14 @@
 				0AAC5D9B29539CCF003032C3 /* AttentionalApp.swift in Sources */,
 				3EAE94352B41B0500014F4A2 /* ColorScreen.swift in Sources */,
 				0AAC5DCE2953A05C003032C3 /* WhisperState.swift in Sources */,
+				3E56B4662B4F05C200C85FC5 /* BulletedListView.swift in Sources */,
 				3EAE944B2B4504980014F4A2 /* RecordViewModel.swift in Sources */,
 				0AAC5DD12953A394003032C3 /* LibWhisper.swift in Sources */,
 				3EAE94452B42384E0014F4A2 /* AppDelegate.swift in Sources */,
+				3E56B46E2B505C4200C85FC5 /* AnnotationGroupView.swift in Sources */,
+				3E56B46A2B503CA300C85FC5 /* SelectOrNewPersonView.swift in Sources */,
 				3EAE944F2B4594DE0014F4A2 /* UserDefaultsExtensions.swift in Sources */,
+				3E56B4682B4F580600C85FC5 /* PersonTagView.swift in Sources */,
 				3EAE94402B42155D0014F4A2 /* ListView.swift in Sources */,
 				3EAE944D2B4593D00014F4A2 /* ConfigView.swift in Sources */,
 				3EAE94542B45BA440014F4A2 /* SectionHeader.swift in Sources */,
@@ -305,6 +330,7 @@
 				0AA7514C2953B569001EE061 /* RiffWaveUtils.swift in Sources */,
 				3E461A192B4DF2F90092FD78 /* SelectPersonView.swift in Sources */,
 				0AA7514E2953D958001EE061 /* Recorder.swift in Sources */,
+				3E56B46C2B503F7800C85FC5 /* PeopleViewModel.swift in Sources */,
 				3EAE94432B4237C60014F4A2 /* Model.xcdatamodeld in Sources */,
 				3E457F482B47287E00A237D0 /* SimpleHeading.swift in Sources */,
 			);
@@ -371,6 +397,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				UIBackgroundModes = "";
 			};
 			name = Debug;
 		};
@@ -425,6 +452,7 @@
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				UIBackgroundModes = "";
 			};
 			name = Release;
 		};
@@ -444,6 +472,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "attentional-swiftui-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = ATTNL;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Needed to transcribe audio";
@@ -494,6 +523,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "attentional-swiftui-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = ATTNL;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Needed to transcribe audio";

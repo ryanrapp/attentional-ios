@@ -38,6 +38,31 @@ struct SectionHeader<Content: View>: View {
     }
 }
 
+public func summarySectionHeader(title: String, imageName: String) -> some View {
+    return SectionHeader(
+        title: title,
+        icon: Image(systemName: imageName),
+        content: {
+//                Menu{
+//                    Button("Re-summarize", action: {
+//                        print("Summarize clicked")
+//                        summarizeInProgress = true
+//                        Task {
+//                            await viewModel.summarize(context: viewContext, record: record, apiKey: apiKey, useGpt4: useGpt4)
+//                        }
+//                    })
+//                    Button("Cancel", action: {
+//
+//                    })
+//                } label: {
+//                    Label("", systemImage: "ellipsis")
+//                } primaryAction: {
+//
+//                }
+        }
+    )
+}
+
 
 
 struct CollapsibleSectionHeader: View {

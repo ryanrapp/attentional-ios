@@ -17,7 +17,8 @@ actor Recorder {
         ]
 #if !os(macOS)
         let session = AVAudioSession.sharedInstance()
-        try session.setCategory(.playAndRecord, mode: .default)
+        try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .allowBluetooth])
+        try session.setActive(true)
 #endif
         let recorder = try AVAudioRecorder(url: url, settings: recordSettings)
         recorder.delegate = delegate
